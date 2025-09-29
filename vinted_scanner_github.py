@@ -65,6 +65,30 @@ def save_seen_items(seen_items):
     except Exception as e:
         print(f"Error saving seen items: {e}")
 
+def get_item_details(session, item_id):
+    """Fetch full item details including description"""
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'en-GB,en;q=0.9',
+            'Referer': 'https://www.vinted.co.uk/',
+        }
+        
+        url = f'https://www.vinted.co.uk/api/v2/items/{item_id}'
+        response = session.get(url, headers=headers, timeout=10)
+        
+        if response.status_code == 200:
+            data = response.json()
+            return data.get('item', {})
+        else:
+            print(f"Failed to get item details: {response.status_code}")
+            return None
+            
+    except Exception as e:
+        print(f"Error fetching item details: {e}")
+        return None
+
 def send_telegram_message(item):
     """Send notification via Telegram"""
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
@@ -76,10 +100,24 @@ def send_telegram_message(item):
     if len(description) > 300:
         description = description[:297] + '...'
     
+    # Get color info
+    color = 'N/A'
+    if item.get('color'):
+        color = item['color']
+    
+    # Get price - extract amount from nested dict
+    price = 'N/A'
+    if item.get('price'):
+        price_data = item['price']
+        if isinstance(price_data, dict) and 'amount' in price_data:
+            price = f"£{price_data['amount']}"
+        else:
+            price = str(price_data)
+    
     message = f"""🆕 New Vinted Item!
 
 📌 {item['title']}
-💰 Price: {item.get('price', 'N/A')}
+💰 Price: {price}
 👕 Brand: {item.get('brand_title', 'N/A')}
 📏 Size: {item.get('size_title', 'N/A')}
 ✨ Condition: {item.get('status', 'N/A')}
@@ -204,6 +242,12 @@ def main():
             
             if item_id not in seen_items:
                 print(f"NEW ITEM: {item['title']} (ID: {item_id})")
+                
+                # Fetch full item details to get description
+                full_item = get_item_details(session, item_id)
+                if full_item:
+                    # Merge full details with basic item info
+                    item.update(full_item)
                 
                 # Add full URL
                 item['url'] = f"https://www.vinted.co.uk/items/{item_id}"
