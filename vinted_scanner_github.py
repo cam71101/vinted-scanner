@@ -25,7 +25,7 @@ def load_seen_items():
     
     try:
         headers = {
-            'Authorization': f'token {GITHUB_TOKEN}',
+            'Authorization': f'token {GIT_TOKEN}',
             'Accept': 'application/vnd.github.v3+json'
         }
         response = requests.get(f'https://api.github.com/gists/{GIST_ID}', headers=headers)
@@ -47,7 +47,7 @@ def save_seen_items(seen_items):
     
     try:
         headers = {
-            'Authorization': f'token {GITHUB_TOKEN}',
+            'Authorization': f'token {GIT_TOKEN}',
             'Accept': 'application/vnd.github.v3+json'
         }
         data = {
