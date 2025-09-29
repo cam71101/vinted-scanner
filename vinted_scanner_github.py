@@ -71,10 +71,10 @@ def send_telegram_message(item):
         print("Telegram not configured")
         return
     
-    message = f"""🆕 New Vinted Item!
+    message = f"""New Vinted Item!
 
 Title: {item['title']}
-Price: £{item.get('price', 'N/A')}
+Price: {item.get('price', 'N/A')}
 Brand: {item.get('brand_title', 'N/A')}
 Size: {item.get('size_title', 'N/A')}
 
@@ -95,7 +95,7 @@ Size: {item.get('size_title', 'N/A')}
                     },
                     timeout=10
                 )
-                print(f"✓ Sent notification with photo for: {item['title']}")
+                print(f"Sent notification with photo for: {item['title']}")
                 return
         
         # Fallback to text only
@@ -107,9 +107,9 @@ Size: {item.get('size_title', 'N/A')}
             },
             timeout=10
         )
-        print(f"✓ Sent notification for: {item['title']}")
+        print(f"Sent notification for: {item['title']}")
     except Exception as e:
-        print(f"✗ Error sending Telegram message: {e}")
+        print(f"Error sending Telegram message: {e}")
 
 def get_vinted_session():
     """Create a session with proper headers to bypass bot detection"""
@@ -176,4 +176,44 @@ def main():
     session = get_vinted_session()
     
     # Process each query
-    for i, query in enumerate(QU
+    for i, query in enumerate(QUERIES):
+        search_term = query.get('search_text', 'all items')
+        print(f"\nProcessing query {i+1}/{len(QUERIES)}: {search_term}")
+        
+        result = search_vinted(session, query)
+        
+        if not result:
+            print("No results returned")
+            continue
+        
+        items = result.get('items', [])
+        print(f"Found {len(items)} items in results")
+        
+        # Check for new items
+        for item in items:
+            item_id = str(item['id'])
+            
+            if item_id not in seen_items:
+                print(f"NEW ITEM: {item['title']} (ID: {item_id})")
+                
+                # Add full URL
+                item['url'] = f"https://www.vinted.co.uk/items/{item_id}"
+                
+                # Send notification
+                send_telegram_message(item)
+                
+                # Mark as seen
+                seen_items.add(item_id)
+                new_items_found += 1
+            else:
+                print(f"Already seen: {item['title']} (ID: {item_id})")
+    
+    # Save updated seen items
+    save_seen_items(seen_items)
+    
+    print(f"\nScan complete!")
+    print(f"New items found: {new_items_found}")
+    print(f"Total tracked items: {len(seen_items)}")
+
+if __name__ == "__main__":
+    main()
