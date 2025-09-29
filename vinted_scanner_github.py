@@ -7,7 +7,7 @@ from datetime import datetime
 # Configuration from environment variables
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
-GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
+GIT_TOKEN = os.environ.get('GIT_TOKEN')
 GIST_ID = os.environ.get('GIST_ID')
 
 # Load queries from file
@@ -20,7 +20,7 @@ except Exception as e:
 
 def load_seen_items():
     """Load previously seen items from GitHub Gist"""
-    if not GITHUB_TOKEN or not GIST_ID:
+    if not GITH_TOKEN or not GIST_ID:
         return set()
     
     try:
@@ -42,7 +42,7 @@ def load_seen_items():
 
 def save_seen_items(seen_items):
     """Save seen items to GitHub Gist"""
-    if not GITHUB_TOKEN or not GIST_ID:
+    if not GIT_TOKEN or not GIST_ID:
         return
     
     try:
