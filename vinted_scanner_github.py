@@ -9,9 +9,15 @@ TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 GIT_TOKEN = os.environ.get('GIT_TOKEN')
 GIST_ID = os.environ.get('GIST_ID')
-QUERIES = json.loads(os.environ.get('VINTED_QUERIES', '[]'))
 
 VINTED_API_URL = "https://www.vinted.co.uk/api/v2/catalog/items"
+
+try:
+    with open('queries.json', 'r') as f:
+        QUERIES = json.load(f)
+except Exception as e:
+    print(f"Error loading queries.json: {e}")
+    QUERIES = []
 
 def load_seen_items():
     """Load previously seen items from GitHub Gist"""
