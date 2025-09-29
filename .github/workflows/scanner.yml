@@ -2,7 +2,7 @@ name: Vinted Scanner
 
 on:
   schedule:
-    # Run every hour (adjust as needed)
+    # Run every hour at minute 0
     - cron: '0 * * * *'
   workflow_dispatch:  # Allows manual triggering
 
@@ -21,12 +21,14 @@ jobs:
         
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install requests
         
     - name: Run scanner
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        GIST_ID: ${{ secrets.GIST_ID }}
         VINTED_QUERIES: ${{ secrets.VINTED_QUERIES }}
       run: |
-        python vinted_scanner_actions.py
+        python vinted_scanner_github.py
