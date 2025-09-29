@@ -8,5 +8,15 @@
     "size_ids": "208",
     "color_ids": "1",
     "brand_ids": "1153"
+  },
+  {
+    "page": "1",
+    "per_page": "20",
+    "search_text": "Old Skool",
+    "order": "newest_first",
+    "status_ids": "1,2,6",
+    "size_ids": "788",
+    "color_ids": "1",
+    "brand_ids": "139"
   }
 ]
