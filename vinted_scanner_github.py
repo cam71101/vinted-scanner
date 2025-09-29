@@ -20,7 +20,7 @@ except Exception as e:
 
 def load_seen_items():
     """Load previously seen items from GitHub Gist"""
-    if not GITH_TOKEN or not GIST_ID:
+    if not GIT_TOKEN or not GIST_ID:
         return set()
     
     try:
