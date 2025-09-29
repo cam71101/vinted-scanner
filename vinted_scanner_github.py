@@ -71,14 +71,23 @@ def send_telegram_message(item):
         print("Telegram not configured")
         return
     
-    message = f"""New Vinted Item!
+    # Get description and truncate if too long
+    description = item.get('description', 'No description')
+    if len(description) > 300:
+        description = description[:297] + '...'
+    
+    message = f"""🆕 New Vinted Item!
 
-Title: {item['title']}
-Price: {item.get('price', 'N/A')}
-Brand: {item.get('brand_title', 'N/A')}
-Size: {item.get('size_title', 'N/A')}
+📌 {item['title']}
+💰 Price: {item.get('price', 'N/A')}
+👕 Brand: {item.get('brand_title', 'N/A')}
+📏 Size: {item.get('size_title', 'N/A')}
+✨ Condition: {item.get('status', 'N/A')}
 
-{item['url']}
+📝 Description:
+{description}
+
+🔗 {item['url']}
 """
     
     try:
