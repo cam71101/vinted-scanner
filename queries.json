@@ -3,6 +3,7 @@
     "page": "1",
     "per_page": "20",
     "search_text": "Seamless Down Parka",
-    "order": "newest_first"
+    "order": "newest_first",
+    "status_ids": "1,2,3",
   }
 ]
