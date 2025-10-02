@@ -23,5 +23,10 @@
     "brand_ids": "10",
     "size_ids": "1640",
     "catalog" : "250"
-   } 
+   },
+  {
+    "catalog": "287",
+    "brand_ids": "2319",
+    "status_ids": "6,1,2",
+  }
 ]
