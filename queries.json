@@ -26,9 +26,11 @@
     "color_ids": "1"
    },
   {
+    "page": "1",
+    "per_page": "20",
+    "order": "newest_first",
     "catalog": "287",
     "brand_ids": "2319",
-    "status_ids": "6,1,2",
-    "search_id": "27124937548"
+    "status_ids": "6,1,2"
   }
 ]
