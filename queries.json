@@ -14,5 +14,14 @@
     "order": "newest_first",
     "status_ids": "1,2,6",
     "brand_ids": "7501872"
-  }
+   },
+  {
+    "page": "1",
+    "per_page": "20",
+    "order": "newest_first",
+    "status_ids": "1,6",
+    "brand_ids": "10",
+    "size_ids": "1640",
+    "catalog" : "250"
+   } 
 ]
