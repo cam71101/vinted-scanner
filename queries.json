@@ -24,11 +24,5 @@
     "size_ids": "1640",
     "catalog" : "250",
     "color_ids": "1"
-   },
- {
-    "page": "1",
-    "per_page": "20",
-    "order": "newest_first",
-    "catalog": "287"
-}
+   }
 ]
