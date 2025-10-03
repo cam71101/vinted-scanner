@@ -23,6 +23,7 @@
     "brand_ids": "10",
     "size_ids": "1640",
     "catalog" : "250",
-    "color_ids": "1"
+    "color_ids": "1",
+    "text_search": "512"
    }
 ]
