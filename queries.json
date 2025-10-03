@@ -1,19 +1,11 @@
 [
-  {
-    "page": "1",
-    "per_page": "20",
-    "order": "newest_first",
-    "status_ids": "1,2,6",
-    "size_ids": "788",
-    "color_ids": "1",
-    "brand_ids": "139"
-  },
    {
     "page": "1",
     "per_page": "20",
     "order": "newest_first",
     "status_ids": "1,2,6",
-    "brand_ids": "7501872"
+    "brand_ids": "7501872",
+     "name": "stubble"
    },
   {
     "page": "1",
@@ -24,6 +16,7 @@
     "size_ids": "1640",
     "catalog" : "250",
     "color_ids": "1",
-    "text_search": "512"
+    "text_search": "512",
+    "name": "levis"
    }
 ]
