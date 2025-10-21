@@ -6,5 +6,11 @@
     "status_ids": "1,2,6",
     "brand_ids": "7501872",
      "name": "stubble"
+   },
+   {
+    "page": "1",
+    "per_page": "20",
+    "order": "newest_first",
+     "name": "wf-c500"
    }
 ]
